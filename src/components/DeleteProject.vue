@@ -31,7 +31,7 @@
           <button type="button" class="btn" @click="confirmDelete">
             Törlés
           </button>
-          <button type="button" class="btn cancelBtn"  @click="cancelDelete">
+          <button type="button" class="btn cancelBtn" @click="cancelDelete">
             Mégse
           </button>
         </div>
@@ -65,8 +65,7 @@ const confirmDelete = () => {
 };
 </script>
 <style>
-
-.cancelBtn{
+.cancelBtn {
   background-color: #444 !important;
   border-color: #444 !important;
 }

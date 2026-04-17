@@ -1,11 +1,9 @@
-<script setup></script>
-
 <template>
   <nav class="d-flex justify-content-between align-items-center py-3 px-4">
     <div class="d-flex align-items-center">
-     <RouterLink to="/" class="d-flex align-items-center text-decoration-none">
-      <img src="/logo.png" class="logo d-none d-md-block" alt="logo" />
-    </RouterLink>
+      <RouterLink to="/" class="d-flex align-items-center text-decoration-none">
+        <img src="/logo.png" class="logo d-none d-md-block" alt="logo" />
+      </RouterLink>
     </div>
     <ul class="d-flex list-unstyled mb-0 gap-4 flex-wrap">
       <li>
@@ -33,7 +31,7 @@
 <style>
 nav {
   background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-weight: 500;
 }
 

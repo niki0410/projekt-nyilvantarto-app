@@ -1,5 +1,7 @@
 <template>
-  <div class="background d-flex flex-column justify-content-center align-items-center p-4 bg-white mt-5 m-5">
+  <div
+    class="background d-flex flex-column justify-content-center align-items-center p-4 bg-white mt-5 m-5"
+  >
     <div class="tite mb-5">Projektek listája</div>
 
     <ProjectListTable
@@ -17,25 +19,24 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue"
-import ProjectListTable from "@/components/ProjectListTable.vue"
-import Toast from "@/components/Toast.vue"
+import { ref, onMounted } from "vue";
+import ProjectListTable from "@/components/ProjectListTable.vue";
+import Toast from "@/components/Toast.vue";
 
-const projects = ref([])
-const toastText = ref("")
-const toastVisible = ref(false)
+const projects = ref([]);
+const toastText = ref("");
+const toastVisible = ref(false);
 
 const loadProjects = () => {
-  projects.value = JSON.parse(localStorage.getItem("projects") || "[]")
-}
+  projects.value = JSON.parse(localStorage.getItem("projects") || "[]");
+};
 
-onMounted(loadProjects)
+onMounted(loadProjects);
 
 const showToast = (message) => {
-  toastText.value = message
-  toastVisible.value = true
-}
-
+  toastText.value = message;
+  toastVisible.value = true;
+};
 </script>
 <style scoped>
 .background {

@@ -21,38 +21,38 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from 'vue'
-import { Toast } from 'bootstrap'
+import { ref, watch, onMounted } from "vue";
+import { Toast } from "bootstrap";
 
 const props = defineProps({
   message: String,
-  show: Boolean
-})
+  show: Boolean,
+});
 
-const emit = defineEmits(['hide'])
-const toastEl = ref(null)
+const emit = defineEmits(["hide"]);
+const toastEl = ref(null);
 
-let toastInstance = null
+let toastInstance = null;
 
 onMounted(() => {
   if (toastEl.value) {
     toastInstance = Toast.getOrCreateInstance(toastEl.value, {
       delay: 2000,
-      autohide: true
-    })
+      autohide: true,
+    });
 
-    toastEl.value.addEventListener('hidden.bs.toast', () => {
-      emit('hide')
-    })
+    toastEl.value.addEventListener("hidden.bs.toast", () => {
+      emit("hide");
+    });
   }
-})
+});
 
 watch(
   () => props.show,
   (val) => {
     if (val && toastInstance) {
-      toastInstance.show()
+      toastInstance.show();
     }
-  }
-)
+  },
+);
 </script>

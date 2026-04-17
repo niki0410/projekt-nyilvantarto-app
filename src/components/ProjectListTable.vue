@@ -1,5 +1,8 @@
 <template>
-  <table class="table table-fixed text-start align-middle" v-if="projects.length">
+  <table
+    class="table table-fixed text-start align-middle"
+    v-if="projects.length"
+  >
     <thead>
       <tr>
         <th style="width: 22%">Projekt neve</th>
@@ -13,10 +16,33 @@
     <tbody>
       <tr v-for="project in sortedProjects" :key="project.id">
         <template v-if="editingId === project.id">
-          <td><input v-model="editForm.projectName" class="form-control form-control-sm" /></td>
-          <td><input v-model="editForm.description" class="form-control form-control-sm" /></td>
-          <td><input v-model="editForm.startDate" type="date" class="form-control form-control-sm" /></td>
-          <td><input v-model.number="editForm.cost" type="number" min="0" class="form-control form-control-sm" /></td>
+          <td>
+            <input
+              v-model="editForm.projectName"
+              class="form-control form-control-sm"
+            />
+          </td>
+          <td>
+            <input
+              v-model="editForm.description"
+              class="form-control form-control-sm"
+            />
+          </td>
+          <td>
+            <input
+              v-model="editForm.startDate"
+              type="date"
+              class="form-control form-control-sm"
+            />
+          </td>
+          <td>
+            <input
+              v-model.number="editForm.cost"
+              type="number"
+              min="0"
+              class="form-control form-control-sm"
+            />
+          </td>
           <td>
             <button class="btn m-1" type="button" @click="saveEdit(project.id)">
               <i class="bi bi-floppy"></i>
@@ -49,66 +75,66 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
-import DeleteProject from './DeleteProject.vue'
+import { computed, ref } from "vue";
+import DeleteProject from "./DeleteProject.vue";
 
 const props = defineProps({
   projects: {
     type: Array,
     required: true,
   },
-})
+});
 
 const sortedProjects = computed(() => {
-  return [...props.projects].sort((a, b) => b.id - a.id)
-})
+  return [...props.projects].sort((a, b) => b.id - a.id);
+});
 
-const emit = defineEmits(['refresh', 'toast'])
+const emit = defineEmits(["refresh", "toast"]);
 
-const editingId = ref(null)
+const editingId = ref(null);
 const editForm = ref({
-  projectName: '',
-  description: '',
-  startDate: '',
+  projectName: "",
+  description: "",
+  startDate: "",
   cost: null,
-})
+});
 
 const startEdit = (project) => {
-  editingId.value = project.id
-  editForm.value = { ...project }
-}
+  editingId.value = project.id;
+  editForm.value = { ...project };
+};
 
 const cancelEdit = () => {
-  editingId.value = null
+  editingId.value = null;
   editForm.value = {
-    projectName: '',
-    description: '',
-    startDate: '',
+    projectName: "",
+    description: "",
+    startDate: "",
     cost: null,
-  }
-}
+  };
+};
 
 const saveEdit = (id) => {
-  const projects = JSON.parse(localStorage.getItem('projects') || '[]')
-  const index = projects.findIndex(p => p.id === id)
+  const projects = JSON.parse(localStorage.getItem("projects") || "[]");
+  const index = projects.findIndex((p) => p.id === id);
 
   if (index !== -1) {
-    projects[index] = { ...projects[index], ...editForm.value }
-    localStorage.setItem('projects', JSON.stringify(projects))
-    emit('refresh')
-    emit('toast', 'Projekt sikeresen szerkesztve!')
+    projects[index] = { ...projects[index], ...editForm.value };
+    localStorage.setItem("projects", JSON.stringify(projects));
+    emit("refresh");
+    emit("toast", "Projekt sikeresen szerkesztve!");
   }
 
-  cancelEdit()
-}
+  cancelEdit();
+};
 
 const handleDelete = (projectId) => {
-  const projects = JSON.parse(localStorage.getItem('projects') || '[]')
-  const updatedProjects = projects.filter((p) => p.id !== projectId)
-  localStorage.setItem('projects', JSON.stringify(updatedProjects))
-  emit('refresh')
-  emit('toast', 'Projekt törölve!')
-}
+  const projects = JSON.parse(localStorage.getItem("projects") || "[]");
+  const updatedProjects = projects.filter((p) => p.id !== projectId);
+  localStorage.setItem("projects", JSON.stringify(updatedProjects));
+  emit("refresh");
+  emit("toast", "Projekt törölve!");
+};
 </script>
 <style>
 .table-fixed {
